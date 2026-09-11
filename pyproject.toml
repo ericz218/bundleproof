@@ -1,0 +1,33 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "bundleproof"
+version = "0.1.0"
+description = "Preflight audits for packaged Python desktop applications"
+readme = "README.md"
+requires-python = ">=3.9"
+license = "MIT"
+authors = [{ name = "Eric Z" }]
+keywords = ["pyinstaller", "packaging", "macos", "release", "ci"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Environment :: Console",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Topic :: Software Development :: Build Tools",
+]
+
+[project.urls]
+Homepage = "https://github.com/ericz218/bundleproof"
+Issues = "https://github.com/ericz218/bundleproof/issues"
+
+[project.scripts]
+bundleproof = "bundleproof.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]

@@ -1,0 +1,24 @@
+name: BundleProof
+description: Audit a packaged Python desktop application before release
+inputs:
+  path:
+    description: Artifact directory or macOS .app bundle
+    required: true
+  require:
+    description: Space-separated required relative paths or glob patterns
+    required: false
+    default: ""
+runs:
+  using: composite
+  steps:
+    - shell: bash
+      run: python -m pip install "${{ github.action_path }}"
+    - shell: bash
+      env:
+        BUNDLEPROOF_PATH: ${{ inputs.path }}
+        BUNDLEPROOF_REQUIRE: ${{ inputs.require }}
+      run: |
+        args=()
+        for pattern in $BUNDLEPROOF_REQUIRE; do args+=(--require "$pattern"); done
+        bundleproof check "$BUNDLEPROOF_PATH" "${args[@]}"
+
